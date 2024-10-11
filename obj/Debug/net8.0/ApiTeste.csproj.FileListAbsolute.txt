@@ -30,3 +30,4 @@ D:\projetos privados\ApiTeste\obj\Debug\net8.0\refint\ApiTeste.dll
 D:\projetos privados\ApiTeste\obj\Debug\net8.0\ApiTeste.pdb
 D:\projetos privados\ApiTeste\obj\Debug\net8.0\ApiTeste.genruntimeconfig.cache
 D:\projetos privados\ApiTeste\obj\Debug\net8.0\ref\ApiTeste.dll
+D:\projetos privados\ApiTeste\obj\Debug\net8.0\ApiTeste.sourcelink.json
