@@ -1,21 +1,26 @@
-# Use a imagem do .NET SDK
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+# Etapa 1: Usar a imagem oficial do SDK .NET Core para compilar a aplicação
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
+
+# Copiar os arquivos do projeto e restaurar as dependências
+COPY *.sln .
+COPY *.csproj ./MyApi/
+RUN dotnet restore
+
+# Copiar todos os arquivos e compilar o projeto
+COPY . .
+WORKDIR /app/MyApi
+RUN dotnet publish -c Release -o /out
+
+# Etapa 2: Usar a imagem oficial do runtime do ASP.NET Core para rodar a aplicação
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+
+# Copiar os arquivos compilados da etapa anterior para o contêiner final
+COPY --from=build /out .
+
+# Expor a porta que o contêiner usará
 EXPOSE 80
 
-# Use uma imagem do SDK para construir a aplicação
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
-COPY ["ApiTeste.csproj", "/app"]
-RUN dotnet restore "app/ApiTeste.csproj"
-COPY . .
-WORKDIR "/app"
-RUN dotnet build "ApiTeste.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "ApiTeste.csproj" -c Release -o /app/publish
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
+# Definir o ponto de entrada para rodar a aplicação
 ENTRYPOINT ["dotnet", "ApiTeste.dll"]
