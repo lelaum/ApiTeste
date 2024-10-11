@@ -6,7 +6,7 @@ EXPOSE 80
 # Use uma imagem do SDK para construir a aplicação
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["ApiTeste.csproj", "app/"]
+COPY ["ApiTeste.csproj", "/app"]
 RUN dotnet restore "app/ApiTeste.csproj"
 COPY . .
 WORKDIR "/app-teste"
