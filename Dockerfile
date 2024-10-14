@@ -8,6 +8,8 @@ RUN dotnet restore
 # Build and publish a release
 RUN dotnet publish -c Release -o out
 
+ENV DOTNET_EnableDiagnostics=0
+
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /App
