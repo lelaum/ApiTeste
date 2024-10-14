@@ -5,9 +5,9 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-RUN dotnet restore "src/ApiTeste.csproj"
+RUN dotnet restore "ApiTeste.csproj"
 COPY . .
-WORKDIR "/src/ApiTeste"
+WORKDIR "/src"
 RUN dotnet build "ApiTeste.csproj" -c Release -o /app/build
 
 FROM build AS publish
