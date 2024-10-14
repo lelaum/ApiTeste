@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\projetos privados\\ApiTeste\\ApiTeste.csproj": {}
+    "D:\\projetos privados\\ApiTeste\\ApiTeste.csproj": {}
   },
   "projects": {
-    "d:\\projetos privados\\ApiTeste\\ApiTeste.csproj": {
+    "D:\\projetos privados\\ApiTeste\\ApiTeste.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\projetos privados\\ApiTeste\\ApiTeste.csproj",
+        "projectUniqueName": "D:\\projetos privados\\ApiTeste\\ApiTeste.csproj",
         "projectName": "ApiTeste",
-        "projectPath": "d:\\projetos privados\\ApiTeste\\ApiTeste.csproj",
+        "projectPath": "D:\\projetos privados\\ApiTeste\\ApiTeste.csproj",
         "packagesPath": "C:\\Users\\charlesf\\.nuget\\packages\\",
-        "outputPath": "d:\\projetos privados\\ApiTeste\\obj\\",
+        "outputPath": "D:\\projetos privados\\ApiTeste\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\charlesf\\AppData\\Roaming\\NuGet\\NuGet.Config",
