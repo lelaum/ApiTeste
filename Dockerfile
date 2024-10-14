@@ -1,19 +1,22 @@
-# Image for our app. To build the app, we use dotnet-sdk
-# and call this image builder
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS builder
-# Directory for our application inside the container
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
+EXPOSE 5000
 
-COPY . /app/
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+COPY ["ApiTeste.csproj", "."]
+RUN dotnet restore "./ApiTeste.csproj"
+COPY . .
+WORKDIR "/src/."
+RUN dotnet build "./ApiTeste.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-RUN dotnet restore
+FROM build AS publish
 
-RUN dotnet publish -c Release -o output
+RUN dotnet publish "./ApiTeste.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=False
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
-
-WORKDIR /App
-
-COPY --from=builder /app .
-
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "ApiTeste.dll"]
