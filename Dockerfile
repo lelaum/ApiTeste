@@ -4,12 +4,7 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-#COPY ["NuGet.Config", "."]
-#COPY . .
 
-# Inserir certificado CA do domínio SEDUC
-#ADD seed-SEDUC-604-ADP-V-CA-1.crt /usr/local/share/ca-certificates/foo.crt
-#RUN chmod 644 /usr/local/share/ca-certificates/foo.crt && update-ca-certificates
 RUN dotnet restore "src/ApiTeste.csproj"
 COPY . .
 WORKDIR "/src/ApiTeste"
