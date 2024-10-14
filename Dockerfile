@@ -14,6 +14,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 
 WORKDIR /App
 
-COPY --from=builder /Application/output .
+COPY --from=builder /app .
 
 ENTRYPOINT ["dotnet", "ApiTeste.dll"]
