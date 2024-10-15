@@ -7,7 +7,13 @@ RUN dotnet restore
 COPY . .
 RUN pwd
 RUN ls -la
-RUN dotnet publish -c Release -o /publish
+
+RUN dotnet build "ApiTeste.csproj" -c Release -o /build
+RUN pwd
+RUN ls -la /build
+
+FROM build-env AS publish
+RUN dotnet publish "ApiTeste.csproj" -c Release -o /publish
 RUN pwd
 RUN ls -la
 
