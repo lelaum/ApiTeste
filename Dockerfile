@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 as build-env
-WORKDIR /
+WORKDIR /src
 COPY *.csproj .
 RUN dotnet restore
 COPY . .
