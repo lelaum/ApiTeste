@@ -10,4 +10,4 @@ WORKDIR /publish
 COPY --from=build-env /publish .
 ENV ASPNETCORE_URLS=http://+:6000
 EXPOSE 6000
-ENTRYPOINT ["dotnet", "ApiTeste.Api.dll"]
+ENTRYPOINT ["dotnet", "ApiTeste.dll"]
