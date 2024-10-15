@@ -1,8 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 as build-env
 WORKDIR /src
 COPY *.csproj .
+RUN ls -la
 RUN dotnet restore
 COPY . .
+RUN ls -la
 RUN dotnet publish -c Release -o /publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 as runtime
