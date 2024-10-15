@@ -1,11 +1,15 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 as build-env
 WORKDIR /src
 COPY *.csproj .
+RUN pwd
 RUN ls -la
 RUN dotnet restore
 COPY . .
+RUN pwd
 RUN ls -la
 RUN dotnet publish -c Release -o /publish
+RUN pwd
+RUN ls -la
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 as runtime
 WORKDIR /publish
