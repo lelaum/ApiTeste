@@ -1,20 +1,13 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-WORKDIR /app
-EXPOSE 8080
-
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 as build-env
 WORKDIR /
+COPY *.csproj .
+RUN dotnet restore
 COPY . .
+RUN dotnet publish -c Release -o /publish
 
-RUN dotnet restore "ApiTeste.csproj"
-COPY . .
-RUN dotnet build "ApiTeste.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "ApiTeste.csproj" -c Release -o /app/publish
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 as runtime
+WORKDIR /publish
+COPY --from=build-env /publish .
+ENV ASPNETCORE_URLS=http://+:6000
+EXPOSE 6000
 ENTRYPOINT ["dotnet", "ApiTeste.dll"]
