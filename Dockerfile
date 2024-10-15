@@ -19,7 +19,7 @@ RUN ls -la
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 as runtime
 WORKDIR /publish
-COPY --from=build-env /publish .
+COPY --from=publish /publish .
 ENV ASPNETCORE_URLS=http://+:6000
 EXPOSE 6000
 ENTRYPOINT ["dotnet", "ApiTeste.dll"]
